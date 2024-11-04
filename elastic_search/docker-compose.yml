@@ -1,0 +1,27 @@
+version: '2'
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:${ELASTIC_VERSION}
+    restart: unless-stopped
+    environment:
+      discovery.type: 'single-node'
+      ELASTIC_PASSWORD: "asdf"
+      cluster.name: 'dockercluster'
+      node.name: 'node-master'
+      bootstrap.memory_lock: 'true'
+      ES_JAVA_OPTS: '-Xms512m -Xmx512m'
+      xpack.security.enabled: 'true'
+    ports:
+      - "${ELASTIC_PORT}:9200"
+      - "9300:9300"
+    volumes: ['esdata:/usr/share/elasticsearch/data']
+    networks:
+      - esnet
+
+
+networks: 
+  esnet:
+
+
+volumes: {"esdata"}

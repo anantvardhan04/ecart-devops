@@ -1,0 +1,46 @@
+{
+    "user": {
+        "principalId": "user",
+        "policyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": "execute-api:Invoke",
+                    "Effect": "Allow",
+                    "Resource": "arn:aws:execute-api:*:*:*/*"
+                },
+                {
+                    "Action": "execute-api:Invoke",
+                    "Effect": "Deny",
+                    "Resource": [
+                        "arn:aws:execute-api:*:*:*/*/*/admin"
+
+                    ]
+                }
+
+            ]
+        }
+    },
+    "admin": {
+        "principalId": "admin",
+        "policyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": "execute-api:Invoke",
+                    "Effect": "Allow",
+                    "Resource": "arn:aws:execute-api:*:*:*/*"
+                },
+                {
+                    "Action": "execute-api:Invoke",
+                    "Effect": "Deny",
+                    "Resource": [
+                        "arn:aws:execute-api:*:*:*/*/*/user"
+
+                    ]
+                }
+
+            ]
+        }
+    }
+}
