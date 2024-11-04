@@ -1,7 +1,7 @@
 resource "aws_codebuild_project" "this" {
   name         = "${var.env}-${var.pipe_line_config.service_name}-codebuild"
   description  = "Codebuild for ${var.pipe_line_config.service_name}"
-  service_role = "${aws_iam_role.codebuild.arn}"
+  service_role = aws_iam_role.codebuild.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -23,29 +23,29 @@ resource "aws_codebuild_project" "this" {
     }
     environment_variable {
       name  = "DISTRIBUTION_ID"
-      value = "${var.cloud_front_distribution_id}"
+      value = var.cloud_front_distribution_id
     }
 
     environment_variable {
       name  = "AWS_ACCOUNT_ID"
-      value = "${var.aws_account_id}"
+      value = var.aws_account_id
     }
 
     environment_variable {
       name  = "AWS_DEFAULT_REGION"
-      value = "${var.region}"
+      value = var.region
     }
     environment_variable {
       name  = "apiBaseUrl"
-      value = "${var.apiBaseUrl}"
+      value = var.apiBaseUrl
     }
-     environment_variable {
+    environment_variable {
       name  = "userPoolId"
-      value = "${var.userPoolId}"
+      value = var.userPoolId
     }
-     environment_variable {
+    environment_variable {
       name  = "userPoolWebClientId"
-      value = "${var.userPoolWebClientId}"
+      value = var.userPoolWebClientId
     }
   }
 
@@ -55,14 +55,3 @@ resource "aws_codebuild_project" "this" {
     git_clone_depth = 1
   }
 }
-
-//resource "aws_codebuild_webhook" "example" {
-//  project_name = aws_codebuild_project.this.name
-//  build_type   = "BUILD"
-//  filter_group {
-//    filter {
-//      type    = "EVENT"
-//      pattern = "PUSH"
-//    }
-//  }
-//}
