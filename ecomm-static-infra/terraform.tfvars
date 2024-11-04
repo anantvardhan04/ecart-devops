@@ -1,7 +1,6 @@
-env              = "dev"
-application_name = "ecart"
-region           = "ap-south-1"
-# aws new account access key and secret key
+env                        = "dev"
+application_name           = "ecart"
+region                     = "ap-south-1"
 access_key                 = ""
 secret_key                 = ""
 aws_account_id             = "975050162729"
