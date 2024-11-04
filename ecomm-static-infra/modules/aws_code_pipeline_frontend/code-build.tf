@@ -13,10 +13,10 @@ resource "aws_codebuild_project" "this" {
     type            = "LINUX_CONTAINER"
     privileged_mode = true
 
-    environment_variable {
-      name  = "IMAGE_REPO_NAME"
-      value = "${var.env}-${var.pipe_line_config.service_name}"
-    }
+    # environment_variable {
+    #   name  = "IMAGE_REPO_NAME"
+    #   value = "${var.env}-${var.pipe_line_config.service_name}"
+    # }
     environment_variable {
       name  = "S3_BUCKET"
       value = "${var.env}-${var.pipe_line_config.s3_bucket}"
@@ -26,27 +26,27 @@ resource "aws_codebuild_project" "this" {
       value = var.cloud_front_distribution_id
     }
 
-    environment_variable {
-      name  = "AWS_ACCOUNT_ID"
-      value = var.aws_account_id
-    }
+    # environment_variable {
+    #   name  = "AWS_ACCOUNT_ID"
+    #   value = var.aws_account_id
+    # }
 
-    environment_variable {
-      name  = "AWS_DEFAULT_REGION"
-      value = var.region
-    }
-    environment_variable {
-      name  = "apiBaseUrl"
-      value = var.apiBaseUrl
-    }
-    environment_variable {
-      name  = "userPoolId"
-      value = var.userPoolId
-    }
-    environment_variable {
-      name  = "userPoolWebClientId"
-      value = var.userPoolWebClientId
-    }
+    # environment_variable {
+    #   name  = "AWS_DEFAULT_REGION"
+    #   value = var.region
+    # }
+    # environment_variable {
+    #   name  = "apiBaseUrl"
+    #   value = var.apiBaseUrl
+    # }
+    # environment_variable {
+    #   name  = "userPoolId"
+    #   value = var.userPoolId
+    # }
+    # environment_variable {
+    #   name  = "userPoolWebClientId"
+    #   value = var.userPoolWebClientId
+    # }
   }
 
   source {
