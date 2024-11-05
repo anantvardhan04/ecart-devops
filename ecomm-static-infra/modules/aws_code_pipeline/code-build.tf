@@ -1,7 +1,7 @@
 resource "aws_codebuild_project" "this" {
   name         = "${var.env}-${var.pipe_line_config.service_name}-codebuild"
   description  = "Codebuild for the ECS Green/Blue ${var.pipe_line_config.service_name} app"
-  service_role = "${aws_iam_role.codebuild.arn}"
+  service_role = aws_iam_role.codebuild.arn
 
   artifacts {
     type = "NO_ARTIFACTS"
@@ -24,12 +24,12 @@ resource "aws_codebuild_project" "this" {
 
     environment_variable {
       name  = "AWS_ACCOUNT_ID"
-      value = "${var.aws_account_id}"
+      value = var.aws_account_id
     }
 
     environment_variable {
       name  = "AWS_DEFAULT_REGION"
-      value = "${var.region}"
+      value = var.region
     }
 
     environment_variable {
@@ -39,12 +39,12 @@ resource "aws_codebuild_project" "this" {
 
     environment_variable {
       name  = "SERVICE_PORT"
-      value = "${var.pipe_line_config.container_port}"
+      value = var.pipe_line_config.container_port
     }
 
     environment_variable {
       name  = "MEMORY_RESV"
-      value = "${var.pipe_line_config.memory_reserv}"
+      value = var.pipe_line_config.memory_reserv
     }
     environment_variable {
       name  = "TASK_DEFINITION_FAMILY"
@@ -54,11 +54,11 @@ resource "aws_codebuild_project" "this" {
       name  = "TASK_DEFINITION_ARN"
       value = var.task_definition_arn
     }
-     environment_variable {
+    environment_variable {
       name  = "ECS_ROLE"
       value = var.ecs_role
     }
-     environment_variable {
+    environment_variable {
       name  = "ECS_TASK_ROLE"
       value = var.ecs_task_role
     }
@@ -70,14 +70,3 @@ resource "aws_codebuild_project" "this" {
     git_clone_depth = 1
   }
 }
-
-//resource "aws_codebuild_webhook" "example" {
-//  project_name = aws_codebuild_project.this.name
-//  build_type   = "BUILD"
-//  filter_group {
-//    filter {
-//      type    = "EVENT"
-//      pattern = "PUSH"
-//    }
-//  }
-//}

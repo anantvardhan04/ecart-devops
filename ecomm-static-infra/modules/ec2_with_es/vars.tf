@@ -24,6 +24,6 @@ variable "instance_ami" {
 
 
 }
-variable "instance_type" { default = "t2.micro" }
+variable "instance_type" { default = "t2.small" }
 variable "instance_count" { default = 1 }
 

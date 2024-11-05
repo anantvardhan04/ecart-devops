@@ -120,7 +120,6 @@ resource "aws_cloudfront_distribution" "website_cdn" {
 
   viewer_certificate {
     cloudfront_default_certificate = true
-    ssl_support_method             = "sni-only"
     minimum_protocol_version       = var.minimum_client_tls_protocol_version
   }
 

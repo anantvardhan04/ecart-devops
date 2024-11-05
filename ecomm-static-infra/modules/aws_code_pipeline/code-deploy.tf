@@ -4,10 +4,10 @@ resource "aws_codedeploy_app" "this" {
 }
 
 resource "aws_codedeploy_deployment_group" "this" {
-  app_name               = "${aws_codedeploy_app.this.name}"
+  app_name               = aws_codedeploy_app.this.name
   deployment_group_name  = "${var.pipe_line_config.service_name}-service-deploy-group"
   deployment_config_name = "CodeDeployDefault.ECSAllAtOnce"
-  service_role_arn       = "${aws_iam_role.codedeploy.arn}"
+  service_role_arn       = aws_iam_role.codedeploy.arn
 
   blue_green_deployment_config {
     deployment_ready_option {
@@ -36,15 +36,15 @@ resource "aws_codedeploy_deployment_group" "this" {
       }
 
       target_group {
-        name = "${var.target_group_info[0]}"
+        name = var.target_group_info[0]
       }
 
       target_group {
-        name = "${var.target_group_info[1]}"
+        name = var.target_group_info[1]
       }
     }
   }
-   trigger_configuration {
+  trigger_configuration {
     trigger_events = [
       "DeploymentSuccess",
       "DeploymentFailure",

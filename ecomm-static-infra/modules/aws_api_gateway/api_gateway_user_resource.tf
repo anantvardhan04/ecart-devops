@@ -9,7 +9,7 @@ resource "aws_lambda_function" "user_lambda" {
   function_name = "user_lambda"
   role          = aws_iam_role.api_gateway_lambda_role.arn
   handler       = "handler.user"
-  runtime       = "python3.7"
+  runtime       = "python3.8"
 
   source_code_hash = data.archive_file.api_user.output_base64sha256
 }

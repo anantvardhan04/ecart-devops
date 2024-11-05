@@ -27,6 +27,9 @@ variable "cloud_front_distribution_id" {
   type = any
 }
 
+variable "s3_cloudfront_bucket" {
+  type = string
+}
 
 
 variable "use_random_suffix" {

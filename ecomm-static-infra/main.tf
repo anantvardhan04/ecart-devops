@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket = "ecart-state-bucket"
+    bucket = "ecart-tf-state-bucket"
     key    = "static-infra/terraform.state"
     region = "ap-south-1"
   }
@@ -56,7 +56,7 @@ module "static_content" {
   application_name                 = var.application_name
   bucket_name                      = "${var.env}-amcart-static-content"
   duplicate-content-penalty-secret = "some-secret-password"
-  deployer                         = "amcart-terraform-deploy-user"
+  deployer                         = "ecart-terraform-deploy-user"
   acm-certificate-arn              = "arn:aws:acm:us-east-1:730736917320:certificate/ccae6a46-99af-4011-b931-5eaec110f2c1"
 }
 
@@ -105,7 +105,7 @@ module "ec2_with_cs" {
   vpc_id             = module.aws_vpc_subnet.vpc_id
   availability_zones = "${var.region}a"
   private_subnet_ids = module.aws_vpc_subnet.public_subnet_id
-  key_name           = "${var.env}_developer_terraform_key"
+  key_name           = "${var.env}_ssh_key"
 }
 
 module "sns_pipeline" {
@@ -164,4 +164,5 @@ module "aws_code_pipe_line_frontend" {
   userPoolId                  = module.cognito-user-pool-http-api.user_pool_id
   userPoolWebClientId         = module.cognito-user-pool-http-api.user_pool_client_id
   cloud_front_distribution_id = module.static_content.cloud_front_distribution_id
+  s3_cloudfront_bucket        = "${var.env}-amcart-static-content"
 }
